@@ -1,0 +1,43 @@
+﻿
+@model HomeViewModel
+
+    <section id="formsection">
+        <form asp-controller="Home" asp-action="add" method="post" class="form-inline" role="form">
+
+            <label asp-for="NewToDoITem.Title" />
+            <input type="text" asp-for="NewToDoITem.Title"  class="form-control"  placeholder="Title" />
+            <label asp-for="NewToDoITem.Description" />
+            <input type="text" asp-for="NewToDoITem.Description" class="form-control" placeholder="Description"  />
+             <button type="submit"  class="btn btn-primary"> Add</button>
+            <span asp-validation-for="NewToDoITem.Title"></span>
+            <span asp-validation-for="NewToDoITem.Description"></span>
+        </form>
+    </section>
+    <section>
+        <ul>
+            @foreach (var item in Model.ToDoItems)
+            {
+                <li class="@(@item.IsComplete ? "complete" : "")">
+                    <article>
+                        <form asp-controller="Home" asp-action="delete" method="post" asp-route-id="@item.ID" class="form-inline">
+                            <button type="submit">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </form>
+                        <form asp-controller="Home" asp-action="update" method="post" asp-route-id="@item.ID" class="form-inline">
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" checked="@item.IsComplete" onChange="this.form.submit()" name="iscomplete" /> Complete
+                                 </label>
+                            </div>
+                           
+                        </form>
+                       <h2>@item.Title</h2>
+                        <p class="@(@item.IsComplete ? "complete" : "")">@item.Description </p>
+                        <p class="time">@item.CreatedDate.ToString("MMM dd yyyy hh:mm tt") </p>
+                    </article>
+                </li>
+            }
+        </ul>
+
+    </section>
