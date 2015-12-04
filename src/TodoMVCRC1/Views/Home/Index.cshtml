@@ -1,11 +1,13 @@
-﻿@model HomeViewModel
+﻿@inject IHtmlLocalizer<todo> loc
+@model HomeViewModel
  <section id="formsection">
+     <h1>@loc.Html("Heading")</h1>
         <form asp-controller="Home" asp-action="add" method="post" class="form-inline" role="form">
 
             <label asp-for="NewToDoITem.Title" />
-            <input type="text" asp-for="NewToDoITem.Title"  class="form-control"  placeholder="Title" />
+            <input type="text" asp-for="NewToDoITem.Title"  class="form-control"  placeholder="@loc.Html("Plh_Title")" />
             <label asp-for="NewToDoITem.Description" />
-            <input type="text" asp-for="NewToDoITem.Description" class="form-control" placeholder="Description"  />
+            <input type="text" asp-for="NewToDoITem.Description" class="form-control" placeholder="@loc.Html("Plh_Desc")"  />
              <button type="submit"  class="btn btn-primary"> Add</button>
             <span asp-validation-for="NewToDoITem.Title"></span>
             <span asp-validation-for="NewToDoITem.Description"></span>

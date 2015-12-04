@@ -10,9 +10,9 @@ namespace TodoMVCRC1.Models
     {
         [Key]
         public int ID { get; set; }
-        [MaxLength(25,ErrorMessage ="cannot be more than 25 char")]
+        [MaxLength(25, ErrorMessageResourceName = "Msg_Title_Len", ErrorMessageResourceType = typeof(TodoMVCRC1.Resources.TodoMVCRC1_Resources_todo))]
         public string Title { get; set; }
-        [Required(AllowEmptyStrings =false, ErrorMessage ="Description is required")]
+        [Required(AllowEmptyStrings =false,  ErrorMessageResourceName = "Msg_Desc_Req", ErrorMessageResourceType =typeof(TodoMVCRC1.Resources.TodoMVCRC1_Resources_todo))]
         public string Description { get; set; }
         public bool IsComplete { get; set; }
         [Required]

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using TodoMVCRC1.Models;
-
+using Microsoft.AspNet.Mvc.Localization;
+using TodoMVCRC1.Resources;
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TodoMVCRC1.Controllers
@@ -13,9 +14,12 @@ namespace TodoMVCRC1.Controllers
     {
         // GET: /<controller>/
         private IToDoRepository _todoRepo;
+        private IHtmlLocalizer<todo> _localizer;
         public HomeController(IToDoRepository todoRepo)
         {
             _todoRepo = todoRepo;
+            //_localizer = loc;
+            //var str = _localizer["Heading"];
         }
         public IActionResult Index()
         {
