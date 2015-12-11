@@ -7,6 +7,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using TodoMVCRC1.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TodoMVCRC1
 {
@@ -21,8 +22,13 @@ namespace TodoMVCRC1
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            loggerFactory.MinimumLevel = LogLevel.Debug;
+
+            // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
+            loggerFactory.AddConsole(LogLevel.Debug);
+            loggerFactory.AddDebug(); 
             app.UseIISPlatformHandler();
             app.UseMvc(routes =>
              routes.MapRoute(

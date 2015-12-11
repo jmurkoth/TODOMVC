@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using TodoMVCRC1.Models;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,12 +14,16 @@ namespace TodoMVCRC1.Controllers
     {
         // GET: /<controller>/
         private IToDoRepository _todoRepo;
-        public HomeController(IToDoRepository todoRepo)
+        private ILogger<HomeController> _logger;
+        public HomeController(IToDoRepository todoRepo, ILogger<HomeController> logger)
         {
             _todoRepo = todoRepo;
+            _logger = logger;
         }
         public IActionResult Index()
         {
+            _logger.LogInformation("Getting the Items-Info");
+            _logger.LogDebug("Getting the Items-Debug");
            var items= _todoRepo.GetAll();
             HomeViewModel hvm = new HomeViewModel { NewToDoITem = new ToDoItem { }, ToDoItems = items };
             return View(hvm);
