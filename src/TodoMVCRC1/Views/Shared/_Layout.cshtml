@@ -9,14 +9,53 @@
         <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Permanent+Marker' rel='stylesheet' type='text/css'>
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
         <link href="~/styles/app.css" rel="stylesheet" />
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
 
 </head>
 <body>
+    <header class="container-fluid">
+        <h1>My ASP.NET To Do List</h1>
+    </header>
+    <aside>
+               
+           <nav class="navbar ">
+          
+               <div class="container-fluid">
+                   <div class="navbar-header">
+                       <a class="navbar-brand" href="#">
+                           <i class="glyphicon glyphicon-bell"></i>
+                           <span>Jeevan Murkoth</span>
+                       </a>
+                      
+                   </div>
+               </div>
 
-        @RenderBody()
+                <ul class="nav nav-stacked ">
+                    <li><a href="#">About</a> </li>
+                    <li><a href="#">Completed</a> </li>
+                    <li><a href="#">Contact Us</a> </li>
+                    <li><a href="#">Log out</a> </li>
+                 </ul>
+            </nav>
+          
+     </aside>
+    <section >
+            @RenderBody()
+    </section>
+    
+    <footer  class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            &copy; 2015 My Todo List
+        </div>
+        
+    </footer>
+    <section>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    </section>
+
 </body>
 </html>
