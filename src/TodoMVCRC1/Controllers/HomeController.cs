@@ -58,12 +58,12 @@ namespace TodoMVCRC1.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Update(int id,  [FromForm]string isComplete, string type)
+        public IActionResult Update(int id,  [FromForm]bool isComplete, string type)
         {
-            bool complete = string.IsNullOrEmpty(isComplete) ? false : (isComplete.Equals("on", StringComparison.OrdinalIgnoreCase) ? true : false);
+           
             var destView = "index";
             var matchItem = _todoRepo.GetById(id);
-            matchItem.IsComplete = complete;
+            matchItem.IsComplete = !isComplete;
             _todoRepo.Update(matchItem);
 
             if(!string.IsNullOrEmpty(type))
