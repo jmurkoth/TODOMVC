@@ -41,21 +41,31 @@ namespace TodoMVCRC1.Controllers
         public IActionResult Edit(int id)
         {
             var item = _todoRepo.GetById(id);
-            return View(item);
+            var todovm = new ToDoViewModel { Description = item.Description, ID = item.ID, IsComplete = item.IsComplete, Title = item.Title };
+            var vm = new EditViewModel { Item = todovm, Referrer = Request.Headers["referer"] };
+            return View(vm);
         }
         [HttpPost]
-        public IActionResult Edit(ToDoViewModel item)
+        public IActionResult Edit(EditViewModel vmitem)
         {
          
-          if(ModelState.IsValid && item.ID.HasValue)
+          if(ModelState.IsValid && vmitem.Item.ID.HasValue)
             {
-                var matchItem = _todoRepo.GetById(item.ID.Value);
-                matchItem.Title = item.Title;
-                matchItem.Description = item.Description;
-                matchItem.IsComplete = item.IsComplete;
+                var matchItem = _todoRepo.GetById(vmitem.Item.ID.Value);
+                matchItem.Title = vmitem.Item.Title;
+                matchItem.Description = vmitem.Item.Description;
+                matchItem.IsComplete = vmitem.Item.IsComplete;
                 _todoRepo.Update(matchItem);
             }
-            return View();
+          if( string.IsNullOrEmpty(vmitem.Referrer))
+            {
+                return RedirectToAction("index");
+            }
+          else
+            {
+                return Redirect(vmitem.Referrer);
+            }
+           
         }
         [HttpPost]
         public IActionResult Update(int id,  [FromForm]bool isComplete, string type)

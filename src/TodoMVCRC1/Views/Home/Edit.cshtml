@@ -1,36 +1,40 @@
-﻿@model ToDoItem
+﻿@model EditViewModel
 <form asp-controller="Home" asp-action="edit" method="post" class="form-horizontal">
     <div class="form-group">
-        <input type="hidden" asp-for="ID" />
-
+        <input type="hidden" asp-for="Item.ID" />
+        <input type="hidden" asp-for="Referrer" />
     </div>
 
     <div class="form-group">
-        <div class="col-sm-3">
-            <label asp-for="Title" class="control-label"></label>
+        <div class="col-sm-3 ">
+            <label asp-for="Item.Title" class="control-label"></label>
             </div>
             <div class="col-sm-9">
-                <input asp-for="Title" type="text" class="form-control" />
+                <input asp-for="Item.Title" type="text" class="form-control" />
+                <span asp-validation-for="Item.Title"></span>
             </div>
         </div>
     <div class="form-group">
         <div class="col-sm-3">
-            <label asp-for="IsComplete" class="control-label"></label>
+            <label asp-for="Item.IsComplete" class="control-label"></label>
             </div>
             <div class="col-sm-9">
-                <input asp-for="IsComplete" type="checkbox"  />
+                <input asp-for="Item.IsComplete" type="checkbox"  />
             </div>
         </div>
-
+   
+  
     <div class="form-group">
         <div class="col-sm-3">
-            <label asp-for="Description" class="control-label"></label>
+            <label asp-for="Item.Description" class="control-label"></label>
             </div>
             <div class="col-sm-9">
-                <textarea asp-for="Description" class="form-control"></textarea>
+                <textarea asp-for="Item.Description" class="form-control"></textarea>
+                <span asp-validation-for="Item.Description"></span>
             </div>
         </div>
     <div class=" col-sm-offset-3 col-sm-9 ">
-        <button type="submit" class="btn btn-primary ">Save</button>
+        <button type="submit" class="btn btn-primary "><i class="glyphicon  glyphicon-save-file"></i>Save</button>
+        <button  class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
         </div> 
 </form>
