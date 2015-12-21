@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<ToDoItem>
+
+<section>
+    <ul>
+        @foreach (var item in Model)
+            {
+            <li class="@(@item.IsComplete ? "complete" : "")">
+                <article>
+                    <form asp-controller="Home" asp-action="delete" method="post" asp-route-id="@item.ID" asp-route-type="active" class="form-inline">
+                        <button type="submit">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </form>
+                    <form asp-controller="Home" asp-action="update" method="post" asp-route-id="@item.ID" asp-route-type="active" class="form-inline">
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" checked="@item.IsComplete" onChange="this.form.submit()" name="iscomplete" /> Complete
+                            </label>
+                        </div>
+
+                    </form>
+                    <h2>@item.Title</h2>
+                    <p class="@(@item.IsComplete ? "complete" : "")">@item.Description </p>
+                    <p class="time">@item.CreatedDate.ToString("MMM dd yyyy hh:mm tt") </p>
+                </article>
+            </li>
+        }
+    </ul>
+
+</section>

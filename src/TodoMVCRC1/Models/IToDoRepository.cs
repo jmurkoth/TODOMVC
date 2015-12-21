@@ -9,7 +9,9 @@ namespace TodoMVCRC1.Models
     {
         void Update(ToDoItem item);
         IList<ToDoItem> GetAll();
-         ToDoItem GetById(int Id);
+        ToDoItem GetById(int Id);
+        IList<ToDoItem> GetCompleted();
+        IList<ToDoItem> GetActive();
         void DeleteById(int Id);
         void Add(ToDoItem item);
 

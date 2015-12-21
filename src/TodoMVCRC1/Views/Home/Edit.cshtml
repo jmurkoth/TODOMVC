@@ -1,0 +1,12 @@
+﻿@model ToDoItem
+<form asp-controller="Home" asp-action="edit" method="post" >
+    <input type="hidden" asp-for="ID"/>
+    <label asp-for="Title"></label>
+    <input asp-for="Title" type="text" />
+    <label asp-for="IsComplete"></label>
+    <input asp-for="IsComplete" type="checkbox" />
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" ></textarea>
+    <button type="submit"></button>
+
+</form>

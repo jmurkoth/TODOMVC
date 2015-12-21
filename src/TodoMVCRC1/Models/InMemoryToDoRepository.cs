@@ -26,8 +26,8 @@ namespace TodoMVCRC1.Models
             var match = _todoItems.FirstOrDefault(c => c.ID == item.ID);
             if (item != null)
             {
-               // match.Description = item.Description;
-                //match.Title = item.Title;
+               match.Description = item.Description;
+               match.Title = item.Title;
                 match.IsComplete = item.IsComplete;
             }
         }
@@ -59,6 +59,16 @@ namespace TodoMVCRC1.Models
         public ToDoItem GetById(int Id)
         {
           return _todoItems.FirstOrDefault(c => c.ID == Id);
+        }
+
+        public IList<ToDoItem> GetCompleted()
+        {
+            return _todoItems.Where(c => c.IsComplete == true).ToList();
+        }
+
+        public IList<ToDoItem> GetActive()
+        {
+            return _todoItems.Where(c => c.IsComplete == false).ToList();
         }
     }
 }

@@ -28,13 +28,49 @@ namespace TodoMVCRC1.Controllers
             HomeViewModel hvm = new HomeViewModel { NewToDoITem = new ToDoItem { }, ToDoItems = items };
             return View(hvm);
         }
+        public IActionResult Completed()
+        {
+            var items = _todoRepo.GetCompleted();
+            return View(items);
+        }
+        public IActionResult Active()
+        {
+            var items = _todoRepo.GetActive();
+            return View(items);
+        }
+        public IActionResult Edit(int id)
+        {
+            var item = _todoRepo.GetById(id);
+            return View(item);
+        }
         [HttpPost]
-        public IActionResult Update(int id,  [FromForm]string isComplete)
+        public IActionResult Edit(ToDoViewModel item)
+        {
+         
+          if(ModelState.IsValid && item.ID.HasValue)
+            {
+                var matchItem = _todoRepo.GetById(item.ID.Value);
+                matchItem.Title = item.Title;
+                matchItem.Description = item.Description;
+                matchItem.IsComplete = item.IsComplete;
+                _todoRepo.Update(matchItem);
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Update(int id,  [FromForm]string isComplete, string type)
         {
             bool complete = string.IsNullOrEmpty(isComplete) ? false : (isComplete.Equals("on", StringComparison.OrdinalIgnoreCase) ? true : false);
-            ToDoItem item = new ToDoItem { ID = id,   IsComplete=complete };
-            _todoRepo.Update(item);
-            return RedirectToAction("index");
+            var destView = "index";
+            var matchItem = _todoRepo.GetById(id);
+            matchItem.IsComplete = complete;
+            _todoRepo.Update(matchItem);
+
+            if(!string.IsNullOrEmpty(type))
+            {
+                destView = type;
+            }
+            return RedirectToAction(destView);
         }
         [HttpPost]
         public IActionResult Add(HomeViewModel item)
