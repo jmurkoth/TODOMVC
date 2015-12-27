@@ -8,10 +8,10 @@ namespace TodoMVCRC1.Models
     public interface IToDoRepository
     {
         void Update(ToDoItem item);
-        IList<ToDoItem> GetAll();
+        IEnumerable<ToDoItem> GetAll();
         ToDoItem GetById(int Id);
-        IList<ToDoItem> GetCompleted();
-        IList<ToDoItem> GetActive();
+        IEnumerable<ToDoItem> GetCompleted();
+        IEnumerable<ToDoItem> GetActive();
         void DeleteById(int Id);
         void Add(ToDoItem item);
 

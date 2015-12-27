@@ -8,6 +8,6 @@ namespace TodoMVCRC1.Models
     public class HomeViewModel
     {
         public ToDoItem NewToDoITem { get; set; }
-        public IList<ToDoItem> ToDoItems { get; set; }
+        public IEnumerable<ToDoItem> ToDoItems { get; set; }
     }
 }
