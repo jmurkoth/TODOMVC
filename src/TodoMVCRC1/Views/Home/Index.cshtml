@@ -17,32 +17,9 @@
     <ul>
         @foreach (var item in Model.ToDoItems)
             {
-            <li class="@(@item.IsComplete ? "complete" : "")">
-                <article>
-                   
-                    <form asp-controller="Home" asp-action="delete" method="post" asp-route-id="@item.ID" class="form-inline">
-                        <button type="submit">
-                            <i class="glyphicon glyphicon-trash"></i>
-                        </button>
-                    </form>
-                    <form asp-controller="Home" asp-action="update" method="post" asp-route-id="@item.ID" class="form-inline">
-                        <input type="hidden" asp-for="@item.IsComplete" name="iscomplete" />
-                        <button type="submit">
 
-                            <i class="@(@item.IsComplete? "glyphicon glyphicon-star":"glyphicon glyphicon-star-empty")"></i>
-                        </button>
-                    </form>
-                    <form class="form-inline">
-                        <a asp-controller="Home" asp-action="edit" method="get" asp-route-id="@item.ID"><i class="glyphicon glyphicon-edit"></i></a>
-                    </form>
-
-                    <h2>@item.Title</h2>
-                    <p class="@(@item.IsComplete ? "complete" : "")">@item.Description </p>
-                    <p class="time">@item.CreatedDate.ToString("MMM dd yyyy hh:mm tt") </p>
-                </article>
-            </li>
-            <todo asp-todo="@item"/>
-        }
+                <todo asp-todo="@item"  />
+            }
     </ul>
 
 </section>
