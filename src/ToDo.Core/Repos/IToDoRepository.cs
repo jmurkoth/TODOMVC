@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ToDo.Core.Models;
 
-namespace TodoMVCRC1.Models
+namespace ToDo.Core.Repos
 {
     public interface IToDoRepository
     {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TodoMVCRC1.Models
+namespace TodoMVCRC1.ViewModels
 {
     public class ToDoViewModel
     {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using TodoMVCRC1.Models;
+﻿using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using ToDo.Core.Repos;
+using ToDo.Core.Models;
+using TodoMVCRC1.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

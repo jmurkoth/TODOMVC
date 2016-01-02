@@ -6,7 +6,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
-using TodoMVCRC1.Models;
+using ToDo.Core.Repos;
 using Microsoft.Extensions.Logging;
 
 namespace TodoMVCRC1
