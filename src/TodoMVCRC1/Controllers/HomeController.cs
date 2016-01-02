@@ -66,21 +66,17 @@ namespace TodoMVCRC1.Controllers
             }
            
         }
+
         [HttpPost]
         public IActionResult Update(int id,  [FromForm]bool isComplete, string type)
         {
-           
-            var destView = "index";
+            var destView = string.IsNullOrEmpty(type) ? "index" : type;
             var matchItem = _todoRepo.GetById(id);
             matchItem.IsComplete = !isComplete;
             _todoRepo.Update(matchItem);
-
-            if(!string.IsNullOrEmpty(type))
-            {
-                destView = type;
-            }
             return RedirectToAction(destView);
         }
+
         [HttpPost]
         public IActionResult Add(HomeViewModel item)
         {
@@ -89,13 +85,13 @@ namespace TodoMVCRC1.Controllers
             _todoRepo.Add(item.NewToDoITem);
               return RedirectToAction("index");
         }
+
         [HttpPost]
-        public IActionResult Delete( int id)
+        public IActionResult Delete( int id , string type)
         {
+            var destView = string.IsNullOrEmpty(type) ? "index": type;
            _todoRepo.DeleteById(id);
-            var items = _todoRepo.GetAll();
-            return RedirectToAction("index");
-           
+           return RedirectToAction(destView);
         }
     }
 }
