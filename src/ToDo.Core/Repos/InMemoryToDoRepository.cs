@@ -3,8 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToDo.Core.Models;
+using ToDo.Core.Repos;
 
-namespace TodoMVCRC1.Models
+namespace ToDo.Core.Repos
 {
     public class InMemoryToDoRepository : IToDoRepository
     {
