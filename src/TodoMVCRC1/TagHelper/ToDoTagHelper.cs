@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TodoMVCRC1.Models;
+using ToDo.Core.Models;
 
 namespace TodoMVCRC1.TagHelpers
 {
