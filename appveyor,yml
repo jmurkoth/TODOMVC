@@ -3,6 +3,7 @@ branches:
   only:
   - master
 before_build:
+- ps: dnu restore
 - cmd: nuget restore
 - cmd: dnu restore
 build:
