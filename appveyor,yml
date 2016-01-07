@@ -4,5 +4,6 @@ branches:
   - master
 before_build:
 - cmd: nuget restore
+- cmd: dnu restore
 build:
   verbosity: minimal
