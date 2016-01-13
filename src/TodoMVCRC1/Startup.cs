@@ -17,7 +17,9 @@ namespace TodoMVCRC1
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //You add a middleware 
             services.AddMvc();
+            // DI in action
             services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
         }
 
@@ -29,12 +31,14 @@ namespace TodoMVCRC1
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
             loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug(); 
+            // Here we are configuring the middleware
             app.UseIISPlatformHandler();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}/{type?}"
                  ));
+            // without static files not event html or images will be served up
             app.UseStaticFiles();
             
            
