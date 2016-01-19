@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ToDo.Core.Repos;
 using Microsoft.Extensions.Logging;
+using ToDo.Core.EF;
 
 namespace TodoMVCRC1
 {
@@ -19,8 +20,13 @@ namespace TodoMVCRC1
         {
             //You add a middleware 
             services.AddMvc();
+            //Add Entity Framework here
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<ToDoDataContext>();
+                
             // DI in action
-            services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
+            services.AddSingleton<IToDoRepository, SQLToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,8 +37,11 @@ namespace TodoMVCRC1
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
             loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug(); 
-            // Here we are configuring the middleware
+            // Here we are configuring the middleware for running in IIS
             app.UseIISPlatformHandler();
+            // Via diagnostics.. shows the new yellow screen of death
+            //TODO: show it only if the environment is development
+            app.UseDeveloperExceptionPage();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
