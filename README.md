@@ -9,10 +9,11 @@ This project will be  used to explore the following new features in ASPNET 5; st
 3. - [x] Tag Helper
 4. - [ ] Identity
 5. - [ ] Entity Framework
+6. - [x] Entity Framework Migrations
 6. - [ ] Gulp Tasks
 7. - [x] Dependency Injection
 8. - [x] Project.json
 9. - [x] Bower.json
 10. - [x] Startup.cs
-
+10. - [ ] MongodB
 It will also be used to explore CI and CD
