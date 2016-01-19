@@ -16,4 +16,5 @@ This project will be  used to explore the following new features in ASPNET 5; st
 9. - [x] Bower.json
 10. - [x] Startup.cs
 10. - [ ] MongodB
+
 It will also be used to explore CI and CD
