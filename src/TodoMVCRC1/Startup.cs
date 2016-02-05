@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ToDo.Core.Repos;
 using Microsoft.Extensions.Logging;
 using ToDo.Core.EF;
+using ToDo.Core.MondoDB;
 
 namespace TodoMVCRC1
 {
@@ -21,12 +22,14 @@ namespace TodoMVCRC1
             //You add a middleware 
             services.AddMvc();
             //Add Entity Framework here
-            services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<ToDoDataContext>();
-                
-            // DI in action
-            services.AddSingleton<IToDoRepository, SQLToDoRepository>();
+            //services.AddEntityFramework()
+            //    .AddSqlServer()
+            //    .AddDbContext<ToDoDataContext>();
+
+            // DI in action using SQL Repo
+            //  services.AddSingleton<IToDoRepository, SQLToDoRepository>();
+            services.AddScoped<MongoContext>();
+            services.AddSingleton<IToDoRepository, MongoToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

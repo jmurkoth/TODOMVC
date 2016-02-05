@@ -37,10 +37,10 @@ namespace TodoMVCRC1.Controllers
             var items = _todoRepo.GetActive();
             return View(items);
         }
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
             var item = _todoRepo.GetById(id);
-            var todovm = new ToDoViewModel { Description = item.Description, ID = item.ID, IsComplete = item.IsComplete, Title = item.Title };
+            var todovm = new ToDoViewModel { Description = item.Description, ID = item.Id, IsComplete = item.IsComplete, Title = item.Title };
             var vm = new EditViewModel { Item = todovm, Referrer = Request.Headers["referer"] };
             return View(vm);
         }
@@ -54,6 +54,8 @@ namespace TodoMVCRC1.Controllers
                 matchItem.Title = vmitem.Item.Title;
                 matchItem.Description = vmitem.Item.Description;
                 matchItem.IsComplete = vmitem.Item.IsComplete;
+                matchItem.UpdatedDate = DateTime.Now;
+                matchItem.UpdatedBy = "jm-upd";
                 _todoRepo.Update(matchItem);
             }
           if( string.IsNullOrEmpty(vmitem.Referrer))
@@ -68,11 +70,13 @@ namespace TodoMVCRC1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int id,  [FromForm]bool isComplete, string type)
+        public IActionResult Update(Guid id,  [FromForm]bool isComplete, string type)
         {
             var destView = string.IsNullOrEmpty(type) ? "index" : type;
             var matchItem = _todoRepo.GetById(id);
             matchItem.IsComplete = !isComplete;
+            matchItem.UpdatedDate = DateTime.Now;
+            matchItem.UpdatedBy = "jm-upd";
             _todoRepo.Update(matchItem);
             return RedirectToAction(destView);
         }
@@ -87,7 +91,7 @@ namespace TodoMVCRC1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete( int id , string type)
+        public IActionResult Delete( Guid id , string type)
         {
             var destView = string.IsNullOrEmpty(type) ? "index": type;
            _todoRepo.DeleteById(id);

@@ -20,9 +20,9 @@ namespace ToDo.Core.Repos
             _context.SaveChanges();
         }
 
-        public void DeleteById(int Id)
+        public void DeleteById(Guid Id)
         {
-            var match = _context.ToDoItems.FirstOrDefault(c => c.ID == Id);
+            var match = _context.ToDoItems.FirstOrDefault(c => c.Id == Id);
             if(match!=null)
             {
                 _context.Remove(match);
@@ -40,9 +40,9 @@ namespace ToDo.Core.Repos
             return _context.ToDoItems.ToList();
         }
 
-        public ToDoItem GetById(int Id)
+        public ToDoItem GetById(Guid Id)
         {
-            return _context.ToDoItems.FirstOrDefault(c => c.ID == Id);
+            return _context.ToDoItems.FirstOrDefault(c => c.Id == Id);
         }
 
         public IEnumerable<ToDoItem> GetCompleted()

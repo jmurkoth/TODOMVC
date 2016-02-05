@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 using System.ComponentModel.DataAnnotations;
 namespace ToDo.Core.Models
@@ -6,7 +7,7 @@ namespace ToDo.Core.Models
     public class ToDoItem
     {
         [Key]
-        public int ID { get; set; }
+        public Guid  Id { get; set; }
         [MaxLength(25,ErrorMessage ="cannot be more than 25 char")]
         public string Title { get; set; }
         [Required(AllowEmptyStrings =false, ErrorMessage ="Description is required")]

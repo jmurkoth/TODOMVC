@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using ToDo.Core.Models;
 
 namespace ToDo.Core.Repos
@@ -7,10 +8,10 @@ namespace ToDo.Core.Repos
     {
         void Update(ToDoItem item);
         IEnumerable<ToDoItem> GetAll();
-        ToDoItem GetById(int Id);
+        ToDoItem GetById(Guid Id);
         IEnumerable<ToDoItem> GetCompleted();
         IEnumerable<ToDoItem> GetActive();
-        void DeleteById(int Id);
+        void DeleteById(Guid Id);
         void Add(ToDoItem item);
 
 
