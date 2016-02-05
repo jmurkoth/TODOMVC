@@ -8,9 +8,10 @@ using ToDo.Core.EF;
 namespace ToDo.Core.Migrations
 {
     [DbContext(typeof(ToDoDataContext))]
-    partial class ToDoDataContextModelSnapshot : ModelSnapshot
+    [Migration("20160205215557_ModelIdChange")]
+    partial class ModelIdChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
