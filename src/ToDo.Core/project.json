@@ -10,12 +10,8 @@
       "frameworkAssemblies": {
         "System.ComponentModel.DataAnnotations": "4.0.0.0"
       }
-    },
-    "dnxcore50": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516"
-      }
     }
+    
   },
   "dependencies": {
     "System.ComponentModel": "4.0.1-beta-23516",
@@ -23,7 +19,8 @@
     "System.Collections.Concurrent": "4.0.11-beta-23516",
     "EntityFramework.Core": "7.0.0-rc1-final",
     "EntityFramework.Commands": "7.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "MongoDB.Driver": "2.2.2"
   },
   "commands": {
     "ef": "EntityFramework.Commands"

@@ -44,7 +44,7 @@ namespace TodoMVCRC1.TagHelpers
                 TagBuilder article = new TagBuilder("article");
                 article.TagRenderMode = TagRenderMode.Normal;
                 // The delete button and form
-                TagBuilder frmDelete = Generator.GenerateForm(ViewContext, "Delete", "Home",new { id = ToDoItem.ID,type=Type }, "POST", new { @class = "form-inline" });
+                TagBuilder frmDelete = Generator.GenerateForm(ViewContext, "Delete", "Home",new { id = ToDoItem.Id,type=Type }, "POST", new { @class = "form-inline" });
                 frmDelete.TagRenderMode = TagRenderMode.Normal;
                 TagBuilder deleteButton = new TagBuilder("button");
                 deleteButton.Attributes["type"] = "submit";
@@ -55,7 +55,7 @@ namespace TodoMVCRC1.TagHelpers
                 article.InnerHtml.Append(frmDelete);
                 // The update form and button
               
-                TagBuilder frmUpdate = Generator.GenerateForm(ViewContext, "Update", "Home", new { id = ToDoItem.ID , type = Type }, "POST", new { @class = "form-inline" });
+                TagBuilder frmUpdate = Generator.GenerateForm(ViewContext, "Update", "Home", new { id = ToDoItem.Id , type = Type }, "POST", new { @class = "form-inline" });
                 frmUpdate.TagRenderMode = TagRenderMode.Normal;
              
                 TagBuilder hdnInput = new TagBuilder("input");
@@ -74,7 +74,7 @@ namespace TodoMVCRC1.TagHelpers
 
                 TagBuilder frmSimple = new TagBuilder("form");
                 frmSimple.AddCssClass("form-inline");
-                TagBuilder updLink = Generator.GenerateActionLink(string.Empty, "edit", "home", string.Empty, string.Empty, string.Empty, new { id = ToDoItem.ID }, null);
+                TagBuilder updLink = Generator.GenerateActionLink(string.Empty, "edit", "home", string.Empty, string.Empty, string.Empty, new { id = ToDoItem.Id }, null);
                 TagBuilder anchIcon = new TagBuilder("i");
                 anchIcon.AddCssClass("glyphicon glyphicon-edit");
                 updLink.InnerHtml.Append(anchIcon);

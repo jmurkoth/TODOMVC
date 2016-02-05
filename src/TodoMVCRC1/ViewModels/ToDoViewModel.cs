@@ -8,7 +8,7 @@ namespace TodoMVCRC1.ViewModels
 {
     public class ToDoViewModel
     {
-        public int? ID { get; set; }
+        public Guid? ID { get; set; }
         [MaxLength(25, ErrorMessage = "cannot be more than 25 char")]
         public string Title { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]
