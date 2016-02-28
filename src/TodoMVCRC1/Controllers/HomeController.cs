@@ -97,5 +97,10 @@ namespace TodoMVCRC1.Controllers
            _todoRepo.DeleteById(id);
            return RedirectToAction(destView);
         }
+        [HttpGet]
+        public IActionResult TestMiddleware()
+        {
+            return Ok();
+        }
     }
 }

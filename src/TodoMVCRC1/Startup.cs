@@ -10,6 +10,7 @@ using ToDo.Core.Repos;
 using Microsoft.Extensions.Logging;
 using ToDo.Core.EF;
 using ToDo.Core.MondoDB;
+using Custom.Middleware;
 
 namespace TodoMVCRC1
 {
@@ -28,35 +29,45 @@ namespace TodoMVCRC1
 
             // DI in action using SQL Repo
             //  services.AddSingleton<IToDoRepository, SQLToDoRepository>();
-            services.AddScoped<MongoContext>();
-            services.AddSingleton<IToDoRepository, MongoToDoRepository>();
+             services.AddScoped<MongoContext>();
+             services.AddSingleton<IToDoRepository, MongoToDoRepository>();
+           // services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            // Here we are configuring the middleware for running in IIS
+            app.UseIISPlatformHandler();
+            // Via diagnostics.. shows the new yellow screen of death
+            //TODO: show it only if the environment is development
+            app.UseStaticFiles();
+            // Need to hook this up before the other middleware is hooked up
+           
+            app.UseMiddleware<HeaderMiddleware>();
             loggerFactory.MinimumLevel = LogLevel.Debug;
 
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
             loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug(); 
-            // Here we are configuring the middleware for running in IIS
-            app.UseIISPlatformHandler();
-            // Via diagnostics.. shows the new yellow screen of death
-            //TODO: show it only if the environment is development
+
             app.UseDeveloperExceptionPage();
+            app.UseMiddleware<PipelineTimerMiddleware>();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}/{type?}"
                  ));
             // without static files not event html or images will be served up
-            app.UseStaticFiles();
-            
+          
            
+
         }
 
         // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        public static void Main(string[] args)
+        {
+            WebApplication.Run<Startup>(args);
+        }
     }
 }
