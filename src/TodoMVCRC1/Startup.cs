@@ -39,26 +39,28 @@ namespace TodoMVCRC1
         {
             // Here we are configuring the middleware for running in IIS
             app.UseIISPlatformHandler();
-            // Via diagnostics.. shows the new yellow screen of death
-            //TODO: show it only if the environment is development
+            // without static files not event html or images will be served up
             app.UseStaticFiles();
             // Need to hook this up before the other middleware is hooked up
-           
-            app.UseMiddleware<HeaderMiddleware>();
+            // this does not use the extension method
+            // app.UseMiddleware<HeaderMiddleware>(new HeaderOptions {HeaderName="X-Powered-By", HeaderValue="ASPNET_CORE" });
+            //using the extension method
+            app.UseCustomHeader(new HeaderOptions { HeaderName = "X-Powered-By", HeaderValue = "ASPNET_CORE" });
             loggerFactory.MinimumLevel = LogLevel.Debug;
-
+            // Via diagnostics.. shows the new yellow screen of death
+            //TODO: show it only if the environment is development
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
             loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug(); 
 
             app.UseDeveloperExceptionPage();
-            app.UseMiddleware<PipelineTimerMiddleware>();
+            app.UsePipelineTimer();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}/{type?}"
                  ));
-            // without static files not event html or images will be served up
+
           
            
 
