@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Data.Entity;
 using ToDo.Core.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace ToDo.Core.EF
 {
     public class ToDoDataContext:DbContext

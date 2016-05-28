@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using ToDo.Core.Repos;
 using ToDo.Core.Models;
 using TodoMVCRC1.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Mvc.ViewFeatures;
-using Microsoft.AspNet.Razor.TagHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using ToDo.Core.Models;
 
 namespace TodoMVCRC1.TagHelpers
@@ -40,7 +35,7 @@ namespace TodoMVCRC1.TagHelpers
             if(ToDoItem!=null)
             {
                 output.TagName = "li";
-                output.Attributes["class"] = ToDoItem.IsComplete ? "complete" : string.Empty;
+                output.Attributes.Add("class", ToDoItem.IsComplete ? "complete" : string.Empty);
                 TagBuilder article = new TagBuilder("article");
                 article.TagRenderMode = TagRenderMode.Normal;
                 // The delete button and form
@@ -50,9 +45,9 @@ namespace TodoMVCRC1.TagHelpers
                 deleteButton.Attributes["type"] = "submit";
                 TagBuilder btnIcon = new TagBuilder("i");
                 btnIcon.AddCssClass("glyphicon glyphicon-trash");
-                deleteButton.InnerHtml.Append(btnIcon);
-                frmDelete.InnerHtml.Append(deleteButton);
-                article.InnerHtml.Append(frmDelete);
+                deleteButton.InnerHtml.AppendHtml(btnIcon);
+                frmDelete.InnerHtml.AppendHtml(deleteButton);
+                article.InnerHtml.AppendHtml(frmDelete);
                 // The update form and button
               
                 TagBuilder frmUpdate = Generator.GenerateForm(ViewContext, "Update", "Home", new { id = ToDoItem.Id , type = Type }, "POST", new { @class = "form-inline" });
@@ -62,39 +57,39 @@ namespace TodoMVCRC1.TagHelpers
                 hdnInput.Attributes["type"] = "hidden";
                 hdnInput.Attributes["name"] = "iscomplete";
                 hdnInput.Attributes["value"] = ToDoItem.IsComplete.ToString();
-                frmUpdate.InnerHtml.Append(hdnInput);
+                frmUpdate.InnerHtml.AppendHtml(hdnInput);
 
                 TagBuilder updateButton = new TagBuilder("button");
                 updateButton.Attributes["type"] = "submit";
                 TagBuilder btnIconUpd = new TagBuilder("i");
                 btnIconUpd.AddCssClass(ToDoItem.IsComplete? "glyphicon glyphicon-star" : "glyphicon glyphicon-star-empty");
-                updateButton.InnerHtml.Append(btnIconUpd);
-                frmUpdate.InnerHtml.Append(updateButton);
-                article.InnerHtml.Append(frmUpdate);
+                updateButton.InnerHtml.AppendHtml(btnIconUpd);
+                frmUpdate.InnerHtml.AppendHtml(updateButton);
+                article.InnerHtml.AppendHtml(frmUpdate);
 
                 TagBuilder frmSimple = new TagBuilder("form");
                 frmSimple.AddCssClass("form-inline");
-                TagBuilder updLink = Generator.GenerateActionLink(string.Empty, "edit", "home", string.Empty, string.Empty, string.Empty, new { id = ToDoItem.Id }, null);
+                TagBuilder updLink = Generator.GenerateActionLink(ViewContext,string.Empty, "edit", "home", string.Empty, string.Empty, string.Empty, new { id = ToDoItem.Id }, null);
                 TagBuilder anchIcon = new TagBuilder("i");
                 anchIcon.AddCssClass("glyphicon glyphicon-edit");
-                updLink.InnerHtml.Append(anchIcon);
-                frmSimple.InnerHtml.Append(updLink);
-                article.InnerHtml.Append(frmSimple);
+                updLink.InnerHtml.AppendHtml(anchIcon);
+                frmSimple.InnerHtml.AppendHtml(updLink);
+                article.InnerHtml.AppendHtml(frmSimple);
 
                 TagBuilder titleTagH = new TagBuilder("h2");
                 titleTagH.InnerHtml.AppendHtml(ToDoItem.Title);
-                article.InnerHtml.Append(titleTagH);
+                article.InnerHtml.AppendHtml(titleTagH);
 
                 TagBuilder descriptionTagP = new TagBuilder("p");
                 descriptionTagP.AddCssClass(ToDoItem.IsComplete ? "complete" : string.Empty);
                 descriptionTagP.InnerHtml.AppendHtml(ToDoItem.Description);
-                article.InnerHtml.Append(descriptionTagP);
+                article.InnerHtml.AppendHtml(descriptionTagP);
 
                 TagBuilder timeTagP = new TagBuilder("p");
                 timeTagP.AddCssClass("time");
                 timeTagP.InnerHtml.AppendHtml(ToDoItem.CreatedDate.ToString("MMM dd yyyy hh:mm tt"));
-                article.InnerHtml.Append(timeTagP);
-                output.Content.Append(article);
+                article.InnerHtml.AppendHtml(timeTagP);
+                output.Content.AppendHtml(article);
                 output.TagMode = TagMode.StartTagAndEndTag;
                 base.Process(context, output);
             }
