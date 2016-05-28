@@ -5,7 +5,7 @@ using ToDo.Core.MondoDB;
 using Custom.Middleware;
 using Microsoft.AspNetCore.Builder;
 
-namespace TodoMVCRC1
+namespace Todo.MVC
 {
     public class Startup
     {

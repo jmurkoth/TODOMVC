@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TodoMVCRC1.ViewModels
+namespace Todo.MVC.ViewModels
 {
     public class EditViewModel
     {

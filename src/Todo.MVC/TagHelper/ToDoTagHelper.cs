@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using ToDo.Core.Models;
 
-namespace TodoMVCRC1.TagHelpers
+namespace Todo.MVC.TagHelpers
 {
     [HtmlTargetElement("todo", Attributes = ForTodoItemAttribute)]
     public class ToDoTagHelper:TagHelper

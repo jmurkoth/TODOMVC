@@ -2,12 +2,12 @@
 using System;
 using ToDo.Core.Repos;
 using ToDo.Core.Models;
-using TodoMVCRC1.ViewModels;
+using Todo.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TodoMVCRC1.Controllers
+namespace Todo.MVC.Controllers
 {
     public class HomeController : Controller
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Core.Models;
 
-namespace TodoMVCRC1.ViewModels
+namespace Todo.MVC.ViewModels
 {
     public class HomeViewModel
     {
