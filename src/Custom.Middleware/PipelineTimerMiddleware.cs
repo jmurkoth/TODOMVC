@@ -23,7 +23,7 @@ namespace Custom.Middleware
             await _next(context);
             watch.Stop();
             // Below does not work consistently especially with views. Refer documentation as modification of header after next may not work
-            context.Response.Headers.Add("X-ProcessingTime", new[] { watch.ElapsedMilliseconds.ToString() });
+            //context.Response.Headers.Add("X-ProcessingTime", new[] { watch.ElapsedMilliseconds.ToString() });
             // Logger is consistent
             _logger.LogInformation($"***********************Processing Time for {context.Request.Path}  { watch.ElapsedMilliseconds } ***********************");
             watch.Reset();

@@ -36,7 +36,7 @@ namespace Todo.MVC
             // this does not use the extension method
             // app.UseMiddleware<HeaderMiddleware>(new HeaderOptions {HeaderName="X-Powered-By", HeaderValue="ASPNET_CORE" });
             //using the extension method
-            app.UseCustomHeader(new HeaderOptions { HeaderName = "X-Powered-By", HeaderValue = "ASPNET_CORE" });
+            //app.UseCustomHeader(new HeaderOptions { HeaderName = "X-Powered-By", HeaderValue = "ASPNET_CORE" });
             // Via diagnostics.. shows the new yellow screen of death
             //TODO: show it only if the environment is development
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
@@ -44,7 +44,8 @@ namespace Todo.MVC
             loggerFactory.AddDebug(); 
 
             app.UseDeveloperExceptionPage();
-            app.UsePipelineTimer();
+            //TODO: This is problematic running under IIS.Needs some investigation on what best to do
+           // app.UsePipelineTimer();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
