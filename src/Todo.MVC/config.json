@@ -1,0 +1,7 @@
+﻿{
+  "Facebook": {
+    "appId": "PULL VALUE FROM ENVIRONMENT",
+    "appSecret": "PULL VALUE FROM ENVIRONMENT"
+  },
+  "TODOConnStr": "PULL VALUE FROM ENVIRONMENT"
+}
