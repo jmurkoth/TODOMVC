@@ -14,6 +14,9 @@
     "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0-rc2-final",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0-rc2-final",
     "Custom.Middleware": "1.0.0-*",
     "ToDo.Core": "1.0.0-*",
     "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
@@ -23,7 +26,12 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview1-final",
       "type": "build"
-    }
+    },
+    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0-rc2-final"
   },
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
@@ -58,5 +66,6 @@
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
-  "version": "1.0.0-*"
+  "version": "1.0.0-*",
+  "userSecretsId": "aspnet-Todo.MVC-20160606074304"
 }

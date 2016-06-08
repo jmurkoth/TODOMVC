@@ -10,15 +10,20 @@ namespace ToDo.Core.EF
     public class ToDoDataContext:DbContext
     {
         public DbSet<ToDoItem> ToDoItems { get; set; }
-        public ToDoDataContext()
+        public ToDoDataContext(DbContextOptions<ToDoDataContext> options)
+            : base(options)
         {
             
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var connectionString = "";
-            optionsBuilder.UseSqlServer(connectionString);
-            base.OnConfiguring(optionsBuilder);
+           
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var connectionString = "";
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }
