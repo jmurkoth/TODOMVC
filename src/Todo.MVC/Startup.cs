@@ -35,11 +35,14 @@ namespace Todo.MVC
             //You add a middleware 
             services.AddMvc();
             //Add Entity Framework here
+            //HACK: Current tooling Preview-1 does not support EF migration target a class library
+            // hence specifying the migration assembly as web app and that is why we end up having migrations
+            // added to the web app instead of the class library that has the context
             services.AddEntityFramework()
-                .AddDbContext<ToDoDataContext>(opts=> opts.UseSqlServer(Configuration.GetConnectionString("TODOConnStr")));
+                .AddDbContext<ToDoDataContext>(opts=> opts.UseSqlServer(Configuration.GetConnectionString("TODOConnStr"),b=>b.MigrationsAssembly("Todo.MVC")));
 
             // DI in action using SQL Repo
-              services.AddSingleton<IToDoRepository, SQLToDoRepository>();
+              services.AddTransient<IToDoRepository, SQLToDoRepository>();
             // services.AddScoped<MongoContext>();
             // services.AddSingleton<IToDoRepository, MongoToDoRepository>();
             // services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();

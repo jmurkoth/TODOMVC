@@ -13,7 +13,7 @@ namespace ToDo.Core.EF
         public ToDoDataContext(DbContextOptions<ToDoDataContext> options)
             : base(options)
         {
-            
+            this.Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
