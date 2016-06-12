@@ -4,26 +4,31 @@ using ToDo.Core.Repos;
 using ToDo.Core.Models;
 using Todo.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Todo.MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: /<controller>/
         private IToDoRepository _todoRepo;
         private ILogger<HomeController> _logger;
+
         public HomeController(IToDoRepository todoRepo, ILogger<HomeController> logger)
         {
             _todoRepo = todoRepo;
             _logger = logger;
+            
         }
         public IActionResult Index()
         {
             _logger.LogInformation("Getting the Items-Info");
             _logger.LogDebug("Getting the Items-Debug");
-           var items= _todoRepo.GetAll();
+            var items= _todoRepo.GetAll(this.User.Identity.Name);
             HomeViewModel hvm = new HomeViewModel { NewToDoITem = new ToDoItem { }, ToDoItems = items };
             return View(hvm);
         }
@@ -55,7 +60,7 @@ namespace Todo.MVC.Controllers
                 matchItem.Description = vmitem.Item.Description;
                 matchItem.IsComplete = vmitem.Item.IsComplete;
                 matchItem.UpdatedDate = DateTime.Now;
-                matchItem.UpdatedBy = "jm-upd";
+                matchItem.UpdatedBy = this.User.Identity.Name;
                 _todoRepo.Update(matchItem);
             }
           if( string.IsNullOrEmpty(vmitem.Referrer))
@@ -76,7 +81,7 @@ namespace Todo.MVC.Controllers
             var matchItem = _todoRepo.GetById(id);
             matchItem.IsComplete = !isComplete;
             matchItem.UpdatedDate = DateTime.Now;
-            matchItem.UpdatedBy = "jm-upd";
+            matchItem.UpdatedBy = this.User.Identity.Name;
             _todoRepo.Update(matchItem);
             return RedirectToAction(destView);
         }
@@ -85,7 +90,7 @@ namespace Todo.MVC.Controllers
         public IActionResult Add(HomeViewModel item)
         {
             item.NewToDoITem.CreatedDate = DateTime.Now;
-            item.NewToDoITem.CreatedBy = "jmurkoth";
+            item.NewToDoITem.CreatedBy = this.User.Identity.Name;
             _todoRepo.Add(item.NewToDoITem);
               return RedirectToAction("index");
         }

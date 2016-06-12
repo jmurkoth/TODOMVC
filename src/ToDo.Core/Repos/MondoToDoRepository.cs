@@ -33,7 +33,7 @@ namespace ToDo.Core.Repos
             return _context.GetActive();
         }
 
-        public IEnumerable<ToDoItem> GetAll()
+        public IEnumerable<ToDoItem> GetAll( string userName)
         {
             return _context.GetAll();
         }

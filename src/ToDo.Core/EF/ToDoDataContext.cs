@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ToDo.Core.EF
 {
-    public class ToDoDataContext:DbContext
+    public class ToDoDataContext: IdentityDbContext<ApplicationUser>
     {
         public DbSet<ToDoItem> ToDoItems { get; set; }
+
         public ToDoDataContext(DbContextOptions<ToDoDataContext> options)
             : base(options)
         {
@@ -17,13 +19,7 @@ namespace ToDo.Core.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            base.OnModelCreating(modelBuilder); 
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var connectionString = "";
-        //    optionsBuilder.UseSqlServer(connectionString);
-        //    base.OnConfiguring(optionsBuilder);
-        //}
     }
 }

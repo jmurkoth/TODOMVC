@@ -9,6 +9,10 @@ using ToDo.Core.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using ToDo.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Todo.MVC
 {
@@ -33,16 +37,20 @@ namespace Todo.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             //You add a middleware 
-            services.AddMvc();
+             services.AddMvc();
             //Add Entity Framework here
             //HACK: Current tooling Preview-1 does not support EF migration target a class library
             // hence specifying the migration assembly as web app and that is why we end up having migrations
             // added to the web app instead of the class library that has the context
             services.AddEntityFramework()
                 .AddDbContext<ToDoDataContext>(opts=> opts.UseSqlServer(Configuration.GetConnectionString("TODOConnStr"),b=>b.MigrationsAssembly("Todo.MVC")));
+            //Add the identity provider
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ToDoDataContext>()
+                    .AddDefaultTokenProviders();
 
             // DI in action using SQL Repo
-              services.AddTransient<IToDoRepository, SQLToDoRepository>();
+            services.AddTransient<IToDoRepository, SQLToDoRepository>();
             // services.AddScoped<MongoContext>();
             // services.AddSingleton<IToDoRepository, MongoToDoRepository>();
             // services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
@@ -69,9 +77,19 @@ namespace Todo.MVC
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
+            //Note order is important use identity has to come before you call 
+            // external login  provider else it won't work
+            app.UseIdentity();
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Google:clientId"],
+                ClientSecret = Configuration["Google:clientSecret"],
+                CallbackPath= "/signin-google"
 
+            });
+          
             //TODO: This is problematic running under IIS.Needs some investigation on what best to do
-           // app.UsePipelineTimer();
+            // app.UsePipelineTimer();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",

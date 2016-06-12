@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
 <html>
 <head>
    
@@ -21,23 +23,36 @@
            <nav class="navbar ">
           
                <div class="container-fluid">
+                   @if (SignInManager.IsSignedIn(User))
+                   {
                    <div class="navbar-header">
                        <a class="navbar-brand" href="#">
-                           <i class="glyphicon glyphicon-bell"></i>
-                           <span>Jeevan Murkoth</span>
+                           <i class="glyphicon glyphicon-user"></i>
+                           <span>@User.Identity.Name</span>
                        </a>
                       
                    </div>
+                   }
                </div>
 
-                <ul class="nav nav-stacked ">
-                    <li><a <a asp-controller="home" asp-action="index">All</a> </li>
-                    <li><a asp-controller="home" asp-action="active">Active</a> </li>
-                    <li><a asp-controller="home" asp-action="Completed">Completed</a> </li>
-                    <li><a href="#">About</a> </li>
-                    <li><a href="#">Contact Us</a> </li>
-                    <li><a href="#">Log out</a> </li>
-                 </ul>
+               <ul class="nav nav-stacked ">
+    @if (SignInManager.IsSignedIn(User))
+    {
+                   <li><a asp-controller="home" asp-action="index">All</a> </li>
+                   <li><a asp-controller="home" asp-action="active">Active</a> </li>
+                   <li><a asp-controller="home" asp-action="Completed">Completed</a> </li>
+    }
+
+    
+                                        <li><a href="#">About</a> </li>
+                                        <li><a href="#">Contact Us</a> </li>
+@if (SignInManager.IsSignedIn(User))
+{
+                    <li>
+                            <a  asp-controller="account" asp-action="logoff" >Log out</a>
+                    </li>
+}
+                                    </ul>
             </nav>
           
      </aside>
@@ -47,7 +62,7 @@
     
     <footer  class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            &copy; 2015 My Todo List
+            &copy; 2016 My Todo List
         </div>
         
     </footer>
