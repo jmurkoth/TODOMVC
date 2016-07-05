@@ -7,8 +7,8 @@ This project will be  used to explore the following new features in ASPNET 5; st
 1. - [ ] Config files
 2. - [x] Logging
 3. - [x] Tag Helper
-4. - [ ] Identity
-5. - [ ] Entity Framework
+4. - [x] Identity
+5. - [x] Entity Framework
 6. - [x] Entity Framework Migrations
 6. - [ ] Gulp Tasks
 7. - [x] Dependency Injection
@@ -16,6 +16,6 @@ This project will be  used to explore the following new features in ASPNET 5; st
 9. - [x] Bower.json
 10. - [x] Startup.cs
 11. - [x] MongodB
-12. - [x] Custom Middleware
+12. - [] Custom Middleware
 
 It will also be used to explore CI and CD
