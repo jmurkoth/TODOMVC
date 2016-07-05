@@ -82,18 +82,25 @@ namespace Todo.MVC
             app.UseIdentity();
             app.UseGoogleAuthentication(new GoogleOptions()
             {
-                ClientId = Configuration["Google:clientId"],
-                ClientSecret = Configuration["Google:clientSecret"],
+                ClientId = Configuration["OAuth:Google:clientId"],
+                ClientSecret = Configuration["OAuth:Google:clientSecret"],
                 CallbackPath= "/signin-google"
 
             });
             // Add the facebook authentication
             app.UseFacebookAuthentication(new FacebookOptions()
             {
-                AppId= Configuration["Facebook:appId"],
-                AppSecret= Configuration["Facebook:appSecret"]
+                AppId= Configuration["OAuth:Facebook:appId"],
+                AppSecret= Configuration["OAuth:Facebook:appSecret"]
 
 
+            });
+            // Add the Microsoft Authentication
+            app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
+            {
+                ClientId = Configuration["OAuth:Microsoft:clientId"],
+                ClientSecret = Configuration["OAuth:Microsoft:clientSecret"]
+                //CallbackPath="/signin-microsoft"
             });
             //TODO: This is problematic running under IIS.Needs some investigation on what best to do
             // app.UsePipelineTimer();

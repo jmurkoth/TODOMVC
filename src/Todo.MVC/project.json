@@ -18,6 +18,7 @@
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
+    "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.0.0",
     "Custom.Middleware": "1.0.0-*",
     "ToDo.Core": "1.0.0-*",
     "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
