@@ -129,6 +129,7 @@ namespace Todo.MVC.Controllers
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {

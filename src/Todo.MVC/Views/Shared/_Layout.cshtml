@@ -36,23 +36,30 @@
                </div>
 
                <ul class="nav nav-stacked ">
-    @if (SignInManager.IsSignedIn(User))
-    {
-                   <li><a asp-controller="home" asp-action="index">All</a> </li>
-                   <li><a asp-controller="home" asp-action="active">Active</a> </li>
-                   <li><a asp-controller="home" asp-action="Completed">Completed</a> </li>
-    }
+                   @if (SignInManager.IsSignedIn(User))
+                   {
+                       <li><a asp-controller="home" asp-action="index">All</a> </li>
+                       <li><a asp-controller="home" asp-action="active">Active</a> </li>
+                       <li><a asp-controller="home" asp-action="Completed">Completed</a> </li>
+                   }
 
-    
-                                        <li><a href="#">About</a> </li>
-                                        <li><a href="#">Contact Us</a> </li>
-@if (SignInManager.IsSignedIn(User))
-{
-                    <li>
-                            <a  asp-controller="account" asp-action="logoff" >Log out</a>
-                    </li>
-}
-                                    </ul>
+
+                   <li><a href="#">About</a> </li>
+                   <li><a href="#">Contact Us</a> </li>
+               </ul>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" >
+                        <ul class="nav nav-stacked ">
+          
+                            <li>
+                                <a href="#" onclick="document.getElementById('logoutForm').submit();" >Log off</a>
+                            </li>
+                        </ul>
+                    </form>
+
+                }
+
             </nav>
           
      </aside>
