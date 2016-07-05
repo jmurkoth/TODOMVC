@@ -59,7 +59,7 @@ namespace ToDo.Core.Repos
             var success = _todoItems.TryRemove(Id, out match);
         }
 
-        public IEnumerable<ToDoItem> GetAll()
+        public IEnumerable<ToDoItem> GetAll(string userName)
         {
             return _todoItems.Values.ToList();
         }

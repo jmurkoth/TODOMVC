@@ -1,12 +1,13 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "ToDo.Core Class Library",
   "authors": [ "jmurkoth" ],
   "dependencies": {
-    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-rc2-final",
-    "NETStandard.Library": "1.5.0-rc2-24027",
-    "MongoDB.Driver": "2.2.4"
+    "Microsoft.EntityFrameworkCore": "1.0.0",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
+    "NETStandard.Library": "1.6.0",
+    "MongoDB.Driver": "2.2.4",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0"
   },
 
   "frameworks": {

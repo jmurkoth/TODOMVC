@@ -1,35 +1,36 @@
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
-namespace ToDo.Core.Migrations
+namespace Todo.MVC.Migrations
 {
-    public partial class initialDatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ToDoItem",
+                name: "ToDoItems",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     IsComplete = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: true),
+                    UpdatedBy = table.Column<string>(nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ToDoItem", x => x.ID);
+                    table.PrimaryKey("PK_ToDoItems", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("ToDoItem");
+            migrationBuilder.DropTable(
+                name: "ToDoItems");
         }
     }
 }

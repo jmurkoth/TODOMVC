@@ -35,9 +35,9 @@ namespace ToDo.Core.Repos
             return _context.ToDoItems.Where(c => c.IsComplete != true).ToList();
         }
 
-        public IEnumerable<ToDoItem> GetAll()
+        public IEnumerable<ToDoItem> GetAll(string userName)
         {
-            return _context.ToDoItems.ToList();
+            return _context.ToDoItems.Where(c=> c.CreatedBy.Equals(userName, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public ToDoItem GetById(Guid Id)

@@ -1,20 +1,20 @@
-using System;
-using ToDo.Core.EF;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using ToDo.Core.EF;
 
-namespace ToDo.Core.Migrations
+namespace Todo.MVC.Migrations
 {
     [DbContext(typeof(ToDoDataContext))]
-    [Migration("20160205215557_ModelIdChange")]
-    partial class ModelIdChange
+    [Migration("20160609042316_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ToDo.Core.Models.ToDoItem", b =>
@@ -40,6 +40,8 @@ namespace ToDo.Core.Migrations
                     b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
+
+                    b.ToTable("ToDoItems");
                 });
         }
     }

@@ -7,7 +7,7 @@ namespace ToDo.Core.Repos
     public interface IToDoRepository
     {
         void Update(ToDoItem item);
-        IEnumerable<ToDoItem> GetAll();
+        IEnumerable<ToDoItem> GetAll(string userName);
         ToDoItem GetById(Guid Id);
         IEnumerable<ToDoItem> GetCompleted();
         IEnumerable<ToDoItem> GetActive();
