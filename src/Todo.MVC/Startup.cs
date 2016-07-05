@@ -87,7 +87,14 @@ namespace Todo.MVC
                 CallbackPath= "/signin-google"
 
             });
-          
+            // Add the facebook authentication
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId= Configuration["Facebook:appId"],
+                AppSecret= Configuration["Facebook:appSecret"]
+
+
+            });
             //TODO: This is problematic running under IIS.Needs some investigation on what best to do
             // app.UsePipelineTimer();
             app.UseMvc(routes =>
