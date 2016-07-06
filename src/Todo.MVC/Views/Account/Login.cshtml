@@ -5,8 +5,13 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 <div class="col-md-12">
+    <div class="jumbotron text-center">
+        <h1>TO DO List</h1>
+        <p>Sample TO DO application built using ASP.NET Core</p>
+     
+    </div>
     <section>
-        <h4>Use one of these service to log in.</h4>
+        <h4 class="text-center">Use one of these service to log in.</h4>
         <hr />
         @{
             var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
@@ -14,19 +19,34 @@
             {
                 <div>
                     <p>
-                        There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                        for details on setting up this ASP.NET application to support logging in via external services.
+                        There are no external authentication services configured.
                     </p>
                 </div>
             }
             else
             {
-                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                    <div>
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" id="loginform">
+                    <div class="text-center">
                         <p>
                             @foreach (var provider in loginProviders)
                             {
-                                <button type="submit" class="btn btn-default" name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account">@provider.AuthenticationScheme</button>
+                                <button type="submit" class="btn btn-default btn-info btn-circle btn-xl " name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account">
+                                   
+                                    @switch (provider.AuthenticationScheme)
+                                    {
+                                        case "Microsoft":
+                                            <i class="fa fa-windows fa-4x "></i>
+                                            break;
+                                        case "Google":
+                                            <i class="fa fa-google fa-4x"></i>
+                                            break;
+                                        case "Facebook":
+                                            <i class="fa fa-facebook fa-5x "></i>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                          </button>
                             }
                         </p>
                     </div>

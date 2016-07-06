@@ -6,70 +6,68 @@
    
         <title>@ViewBag.Title</title>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="~/styles/reset.css" rel="stylesheet" />
-        <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Permanent+Marker' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Indie+Flower|Permanent+Marker' rel='stylesheet' type='text/css' />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
         <link href="~/styles/app.css" rel="stylesheet" />
 
 
 </head>
 <body>
-    <header class="container-fluid">
-        <h1>My ASP.NET To Do List</h1>
-    </header>
-    <aside>
-               
-           <nav class="navbar ">
-          
-               <div class="container-fluid">
-                   @if (SignInManager.IsSignedIn(User))
-                   {
-                   <div class="navbar-header">
-                       <a class="navbar-brand" href="#">
-                           <i class="glyphicon glyphicon-user"></i>
-                           <span>@User.Identity.Name</span>
-                       </a>
-                      
-                   </div>
-                   }
-               </div>
+    <header >
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;TO DO List</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li><a asp-controller="home" asp-action="index"><i class="fa fa-home"></i>All</a> </li>
+                            <li><a asp-controller="home" asp-action="active"><i class="fa fa-star-o"></i>Active</a> </li>
+                            <li><a asp-controller="home" asp-action="Completed"><i class="fa fa-star"></i>Completed</a> </li>
+                        }
+                        <li><a asp-controller="misc" asp-action="about"><i class="fa fa-info-circle"></i>About</a> </li>
+                        <li><a asp-controller="misc" asp-action="contact"><i class="fa fa-comments-o"></i>Contact Us</a> </li>
+                    </ul>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
 
-               <ul class="nav nav-stacked ">
-                   @if (SignInManager.IsSignedIn(User))
-                   {
-                       <li><a asp-controller="home" asp-action="index">All</a> </li>
-                       <li><a asp-controller="home" asp-action="active">Active</a> </li>
-                       <li><a asp-controller="home" asp-action="Completed">Completed</a> </li>
-                   }
-
-
-                   <li><a href="#">About</a> </li>
-                   <li><a href="#">Contact Us</a> </li>
-               </ul>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" >
-                        <ul class="nav nav-stacked ">
-          
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><i class="glyphicon glyphicon-user"></i><span>@User.Identity.Name</span></li>
+                            <li>&nbsp;</li>
                             <li>
-                                <a href="#" onclick="document.getElementById('logoutForm').submit();" >Log off</a>
+                                <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                    <a onclick="document.getElementById('logoutForm').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i>Log off</a>
+                                </form>
+
                             </li>
                         </ul>
-                    </form>
+                    }
 
-                }
+                </div>
+                </div>
+</nav>
+    </header>
 
-            </nav>
-          
-     </aside>
+
+
     <section >
             @RenderBody()
     </section>
     
     <footer  class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            &copy; 2016 My Todo List
+        <div class="container text-center">
+            &copy; 2016 TO DO List
         </div>
         
     </footer>

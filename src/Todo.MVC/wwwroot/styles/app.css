@@ -1,5 +1,4 @@
 ﻿body {
-   background-color: #666;
    margin-top:20px;
    margin-left:30px;
    margin-right:30px;
@@ -13,17 +12,17 @@ body > aside{
   top: 0px;
   width: 300px;
   height: 100%;
-  background-color:#000000;
+  background-color:#eeeeee;
 }
 body> section{
-    padding-left:300px;
+   margin-top:60px;
 }
 body > section  > section > #formsection {
    margin:auto;
 }
-body > section  > section > ul {
+.ul-todo {
 }
-body > section >section>ul> li{
+.ul-todo > li{
         background-color:#ffc;
         margin: 1em;
         width: 10em;
@@ -33,7 +32,7 @@ body > section >section>ul> li{
         padding:.5em;
         vertical-align: top;
 }
-body > section >section>ul> li.complete {
+.ul-todo > li.complete {
         background-color:#ffc;
         margin: 1em;
         width: 10em;
@@ -44,7 +43,7 @@ body > section >section>ul> li.complete {
         vertical-align: top;
         text-decoration:line-through;
 }
-body > section >section>ul> li> article >h2
+.ul-todo > li> article >h2
 {
         font-family: 'Permanent Marker', cursive;
         margin-top: 5px;
@@ -53,20 +52,20 @@ body > section >section>ul> li> article >h2
       -ms-word-break: break-word;
         word-break: break-word;
 }
-body > section >section>ul> li> article >form>button
+.ul-todo > li> article >form>button
 {
         border-width:0;
         background-color:transparent;
         float:right;
 }
-body > section > section > ul > li > article > p {
+.ul-todo  > li > article > p {
         border-width: 0;
         background-color: transparent;
         float: left;
     -ms-word-break: break-word ;
         word-break: break-word ;
 }
-body > section > section > ul > li > article > p.complete {
+.ul-todo  > li > article > p.complete {
         border-width: 0;
         background-color: transparent;
         float: left;
@@ -74,7 +73,7 @@ body > section > section > ul > li > article > p.complete {
         word-break: break-word ;
         text-decoration:line-through;
 }
-body > section >section>ul> li> article >p.time
+.ul-todo > li> article >p.time
 {
         border-top-style: dashed;
         border-top-width: .1em;
@@ -82,4 +81,30 @@ body > section >section>ul> li> article >p.time
         width: 100%;
         font-size:x-small;
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  padding: 10px 16px;
+  margin:10px;
+  line-height: 1;
+  border-radius: 45px;
 }
