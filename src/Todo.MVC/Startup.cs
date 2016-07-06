@@ -13,6 +13,8 @@ using ToDo.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
+using ToDo.Core.Service;
+using Todo.MVC.Services;
 
 namespace Todo.MVC
 {
@@ -51,6 +53,7 @@ namespace Todo.MVC
 
             // DI in action using SQL Repo
             services.AddTransient<IToDoRepository, SQLToDoRepository>();
+            services.AddScoped<IUserService , UserService>();
             // services.AddScoped<MongoContext>();
             // services.AddSingleton<IToDoRepository, MongoToDoRepository>();
             // services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();

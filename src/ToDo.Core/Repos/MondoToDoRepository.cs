@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Core.Models;
 using ToDo.Core.MondoDB;
+using ToDo.Core.Service;
 
 namespace ToDo.Core.Repos
 {
     public class MongoToDoRepository : IToDoRepository
     {
         private MongoContext _context;
-        public MongoToDoRepository(MongoContext context)
+        private string _userName;
+        public MongoToDoRepository(MongoContext context, IUserService userService)
         {
             _context = context;
+            _userName = userService?.UserName;
         }
         public void Add(ToDoItem item)
         {
@@ -22,7 +25,7 @@ namespace ToDo.Core.Repos
         public void DeleteById(Guid Id)
         {
             ToDoItem match = _context.FindById(Id);
-            if(match!=null)
+            if(match!=null && match.CreatedBy.Equals(this._userName, StringComparison.OrdinalIgnoreCase))
             {
                 _context.Remove(match);
             }
@@ -33,7 +36,7 @@ namespace ToDo.Core.Repos
             return _context.GetActive();
         }
 
-        public IEnumerable<ToDoItem> GetAll( string userName)
+        public IEnumerable<ToDoItem> GetAll( )
         {
             return _context.GetAll();
         }

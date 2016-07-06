@@ -1,25 +1,48 @@
 ﻿
 @model HomeViewModel
 
-<section id="formsection">
-    <form asp-controller="Home" asp-action="add" method="post" class="form-inline" role="form">
+<ol class="breadcrumb">
+    <li><a asp-controller="Home" asp-action="index">Home</a></li>
+    <li class="active">Edit Item</li>
+</ol>
+<section id="formsection" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2><i class="fa fa-home"></i> All items</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form asp-controller="Home" asp-action="add" method="post" role="form">
+                <div class="form-group">
+                    <label asp-for="NewToDoITem.Title">Title</label>
+                    <input type="text" asp-for="NewToDoITem.Title" class="form-control" placeholder="Title" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewToDoITem.Description">Description</label>
+                    <textarea asp-for="NewToDoITem.Description" class="form-control" placeholder="Description"></textarea>
+                </div>
 
-        <label asp-for="NewToDoITem.Title" />
-        <input type="text" asp-for="NewToDoITem.Title" class="form-control" placeholder="Title" />
-        <label asp-for="NewToDoITem.Description" />
-        <input type="text" asp-for="NewToDoITem.Description" class="form-control" placeholder="Description" />
-        <button type="submit" class="btn btn-primary"> Add</button>
-        <span asp-validation-for="NewToDoITem.Title"></span>
-        <span asp-validation-for="NewToDoITem.Description"></span>
-    </form>
+                <button type="submit" class="btn btn-primary"> Add</button>
+          
+               
+                    <span asp-validation-for="NewToDoITem.Title"></span>
+                    <span asp-validation-for="NewToDoITem.Description"></span>
+           
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+
 </section>
-<section>
-    <ul>
+<section class="container">
+    <ul class="ul-todo">
         @foreach (var item in Model.ToDoItems)
             {
 
-                <todo asp-todo="@item"  />
-            }
+            <todo asp-todo="@item" />
+        }
     </ul>
 
 </section>
