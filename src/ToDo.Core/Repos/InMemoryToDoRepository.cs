@@ -85,7 +85,7 @@ namespace ToDo.Core.Repos
 
         public IEnumerable<ToDoItem> GetCompleted()
         {
-            return _todoItems.Values.Where(c =>  c.IsComplete != true && c.CreatedBy.Equals(this._userName, StringComparison.OrdinalIgnoreCase)).ToList();
+            return _todoItems.Values.Where(c =>  c.IsComplete == true && c.CreatedBy.Equals(this._userName, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public IEnumerable<ToDoItem> GetActive()
