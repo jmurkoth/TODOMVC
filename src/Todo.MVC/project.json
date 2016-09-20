@@ -34,7 +34,8 @@
     "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
-    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0"
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0"
   },
   "tools": {
 
@@ -74,6 +75,7 @@
     "include": [
       "wwwroot",
       "web.config",
+      "appsettings.json",
       "Views"
     ]
   },

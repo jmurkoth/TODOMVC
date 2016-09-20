@@ -1,46 +1,46 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ToDo.Core.Repos;
-using Microsoft.Extensions.Logging;
-using ToDo.Core.MondoDB;
-using Custom.Middleware;
+﻿using Custom.Middleware;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using ToDo.Core.EF;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
-using ToDo.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Mvc;
-using ToDo.Core.Service;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Todo.MVC.Services;
+using ToDo.Core.EF;
+using ToDo.Core.Models;
+using ToDo.Core.Repos;
+using ToDo.Core.Service;
 
 namespace Todo.MVC
 {
-    public class Startup
+    public class StartupDevelopment
     {
         public IConfigurationRoot Configuration { get; }
-        public Startup(IHostingEnvironment env)
+        public StartupDevelopment(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-                 Configuration = builder.Build();
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddEnvironmentVariables();
+               // Add the user secrets
+                builder.AddUserSecrets();
+                Configuration = builder.Build();
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             //You add a middleware 
-             services.AddMvc();
+            services.AddMvc();
             //Add Entity Framework here
             //HACK: Current tooling Preview-1 does not support EF migration target a class library
             // hence specifying the migration assembly as web app and that is why we end up having migrations
             // added to the web app instead of the class library that has the context
-           services.AddEntityFramework()
-               .AddDbContext<ToDoDataContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("TODOConnStr"), b => b.MigrationsAssembly("Todo.MVC")));
             services.AddEntityFramework()
                 .AddDbContext<ToDoDataContext>(opts => opts.UseInMemoryDatabase());
             //Add the identity provider
@@ -48,18 +48,14 @@ namespace Todo.MVC
                     .AddEntityFrameworkStores<ToDoDataContext>()
                     .AddDefaultTokenProviders();
 
-            // DI in action using SQL Repo
-           services.AddTransient<IToDoRepository, SQLToDoRepository>();
-           services.AddScoped<IUserService , UserService>();
-            // services.AddScoped<MongoContext>();
-            // services.AddSingleton<IToDoRepository, MongoToDoRepository>();
 
+            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
-          // without static files not event html or images will be served up
+            // without static files not event html or images will be served up
             app.UseStaticFiles();
             // Need to hook this up before the other middleware is hooked up
             // this does not use the extension method
@@ -102,18 +98,17 @@ namespace Todo.MVC
                 ClientSecret = Configuration["OAuth:Microsoft:clientSecret"]
                 //CallbackPath="/signin-microsoft"
             });
-           
-           app.UsePipelineTimer();
+            //TODO: This is problematic running under IIS.Needs some investigation on what best to do
+            app.UsePipelineTimer();
             app.UseMvc(routes =>
              routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}/{type?}"
                  ));
 
-          
-           
+
+
 
         }
-
     }
 }
