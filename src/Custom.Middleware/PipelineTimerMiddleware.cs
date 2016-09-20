@@ -19,14 +19,22 @@ namespace Custom.Middleware
         {
             _logger.LogInformation("***********************Invoked Pipeline Timer MiddleWare***********************");
             Stopwatch watch = new Stopwatch();
-            watch.Start();
-            await _next(context);
-            watch.Stop();
+         
+        
+            context.Response.OnStarting(() =>
+            {
+                watch.Stop();
+                _logger.LogInformation($"***********************Processing Time for {context.Request.Path}  { watch.ElapsedMilliseconds } ***********************");
+                context.Response.Headers.Add("X-Processing-Time-Milliseconds",new[] { watch.ElapsedMilliseconds.ToString() });
+                watch.Reset();
+                return Task.FromResult(0);
+            });
             // Below does not work consistently especially with views. Refer documentation as modification of header after next may not work
             //context.Response.Headers.Add("X-ProcessingTime", new[] { watch.ElapsedMilliseconds.ToString() });
-            // Logger is consistent
-            _logger.LogInformation($"***********************Processing Time for {context.Request.Path}  { watch.ElapsedMilliseconds } ***********************");
-            watch.Reset();
+             
+            watch.Start();
+            await _next(context);
+     
         }
     }
 }
