@@ -27,6 +27,7 @@ namespace Todo.MVC
             var builder = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
                .AddEnvironmentVariables();
+           // builder.AddUserSecrets();
             Configuration = builder.Build();
         }
         public void ConfigureServices(IServiceCollection services)
@@ -61,14 +62,12 @@ namespace Todo.MVC
             // Via diagnostics.. shows the new yellow screen of death
 
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
-            if (env.IsDevelopment())
-            {
-                loggerFactory.AddConsole(LogLevel.Debug);
+               loggerFactory.AddConsole(LogLevel.Debug);
                 loggerFactory.AddDebug();
 
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            }
+           
             //Note order is important use identity has to come before you call 
             // external login  provider else it won't work
             app.UseIdentity();
