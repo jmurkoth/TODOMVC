@@ -23,13 +23,15 @@ namespace Custom.Middleware
         }
         public async Task Invoke(HttpContext context)
         {
-            _logger.LogInformation("***********************Invoked custom MiddleWare***********************");
-            if (!string.IsNullOrEmpty( _options?.HeaderName))
-            {
-                context.Response.Headers.Add(_options.HeaderName, _options.HeaderValue);
-            }
-            await _next.Invoke(context);
-            _logger.LogInformation("*******************Final Invoked custom MiddleWare *********************");
+            context.Response.OnStarting(() =>{
+                if (!string.IsNullOrEmpty(_options?.HeaderName))
+                {
+                    context.Response.Headers.Add(_options.HeaderName, _options.HeaderValue);
+                    _logger.LogInformation("***********************Invoked custom  HeaderMiddleWare***********************");
+                }
+                return Task.FromResult(0);
+            });
+            await _next(context);
         }
     }
 }
