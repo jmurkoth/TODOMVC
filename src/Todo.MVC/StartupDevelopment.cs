@@ -1,4 +1,5 @@
 ﻿using Custom.Middleware;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,9 +8,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Claims;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Todo.MVC.Services;
 using ToDo.Core.EF;
@@ -35,6 +41,7 @@ namespace Todo.MVC
         }
         public void ConfigureServices(IServiceCollection services)
         {
+         
             //You add a middleware 
             services.AddMvc();
             //Add Entity Framework here
@@ -47,23 +54,26 @@ namespace Todo.MVC
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ToDoDataContext>()
                     .AddDefaultTokenProviders();
-
-
+        
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<IToDoRepository, InMemoryToDoRepository>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
-            // without static files not event html or images will be served up
-            app.UseStaticFiles();
             // Need to hook this up before the other middleware is hooked up
             // this does not use the extension method
             // app.UseMiddleware<HeaderMiddleware>(new HeaderOptions {HeaderName="X-Powered-By", HeaderValue="ASPNET_CORE" });
             //using the extension method
-            //app.UseCustomHeader(new HeaderOptions { HeaderName = "X-Powered-By", HeaderValue = "ASPNET_CORE" });
-            // Via diagnostics.. shows the new yellow screen of death
+            app.UseCustomHeader(new HeaderOptions { HeaderName = "X-TODO-Powered-By", HeaderValue = "ASPNET_CORE" });
 
+            // without static files not event html or images will be served up
+            app.UseStaticFiles();
+
+            // Add another custom middle ware that adds the execution time as a header 
+            app.UsePipelineTimer();
+
+            // Via diagnostics.. shows the new yellow screen of death
             // Need to add .adddebug and  console logging level should watch if you want debug messages to popup
             if (env.IsDevelopment())
             {
@@ -73,42 +83,33 @@ namespace Todo.MVC
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
+
             //Note order is important use identity has to come before you call 
             // external login  provider else it won't work
             app.UseIdentity();
-            app.UseGoogleAuthentication(new GoogleOptions()
-            {
-                ClientId = Configuration["OAuth:Google:clientId"],
-                ClientSecret = Configuration["OAuth:Google:clientSecret"],
-                CallbackPath = "/signin-google"
-
+            app.UseTODOMVCOAuthAuthentication(Configuration);
+         
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                      name: "unauth",
+                      template: "Account/OauthError/{message?}",
+                      defaults: new { controller = "Account", action = "OauthError" }
+                   );
+                routes.MapRoute(
+                       name: "default",
+                       template: "{controller=Home}/{action=Index}/{id?}/{type?}/{message?}"
+                    );
+               
             });
-            //Add the facebook authentication
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = Configuration["OAuth:Facebook:appId"],
-                AppSecret = Configuration["OAuth:Facebook:appSecret"]
-
-
-            });
-            //Add the Microsoft Authentication
-            app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            {
-                ClientId = Configuration["OAuth:Microsoft:clientId"],
-                ClientSecret = Configuration["OAuth:Microsoft:clientSecret"]
-                //CallbackPath="/signin-microsoft"
-            });
-            //TODO: This is problematic running under IIS.Needs some investigation on what best to do
-            app.UsePipelineTimer();
-            app.UseMvc(routes =>
-             routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}/{type?}"
-                 ));
 
 
 
 
         }
+
+ 
+
     }
+   
+
 }

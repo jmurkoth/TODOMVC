@@ -17,20 +17,6 @@ namespace ToDo.Core.Repos
         {
             _todoItems = new ConcurrentDictionary<Guid,ToDoItem>();
             _userName = userService?.UserName;
-            Guid tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId,new ToDoItem { Id = tmpId, Title="very long long title" ,Description = "Test", CreatedBy = _userName, CreatedDate = DateTime.Now , IsComplete=true});
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId,new ToDoItem { Id = tmpId, Description = "Test1", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = false });
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId, new ToDoItem { Id = tmpId, Description = "Test2", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = true });
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId,new ToDoItem { Id = tmpId, Title="title", Description = "Test3", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = false });
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId, new ToDoItem { Id = tmpId, Description = "Test4", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = true });
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId, new ToDoItem { Id = tmpId,  Title ="Title" ,Description = "Test5", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = false });
-            tmpId = Guid.NewGuid();
-            _todoItems.TryAdd(tmpId, new ToDoItem { Id = tmpId, Description = "Test6", CreatedBy = _userName, CreatedDate = DateTime.Now, IsComplete = true });
         }
 
         
