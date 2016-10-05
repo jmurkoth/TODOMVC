@@ -137,5 +137,10 @@ namespace Todo.MVC.Controllers
             _logger.LogInformation(4, "User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        public IActionResult OAuthError(string message)
+        {
+              return View("oautherror",message);
+        }
     }
 }
