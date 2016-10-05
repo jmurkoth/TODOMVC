@@ -16,6 +16,7 @@ This project will be  used to explore the following new features in ASPNET 5; st
 9. - [x] Bower.json
 10. - [x] Startup.cs
 11. - [x] MongodB
-12. - [ ] Custom Middleware
+12. - [x] Custom Middleware
 
 It will also be used to explore CI and CD
+The Custom Middleware for doing OAuth with LinkedIn is based off of the code for [Google OAuth](https://github.com/aspnet/Security/tree/dev/src) with minor modifications
