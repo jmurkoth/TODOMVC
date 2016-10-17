@@ -27,7 +27,6 @@ namespace Todo.MVC
             var builder = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
                .AddEnvironmentVariables();
-           // builder.AddUserSecrets();
             Configuration = builder.Build();
         }
         public void ConfigureServices(IServiceCollection services)

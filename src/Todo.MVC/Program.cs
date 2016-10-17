@@ -15,7 +15,7 @@ namespace Todo.MVC
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-               // .UseStartup<Startup>()
+               // .UseStartup<Startup>()-- Rather than using a specific startup ; making it dynamic
                 .UseStartup(assemblyName)
                 .Build();
 
