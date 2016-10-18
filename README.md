@@ -21,3 +21,4 @@ This project will be  used to explore the following new features in ASPNET 5; st
 It will also be used to explore CI and CD
 
 The Custom Middleware for doing OAuth with LinkedIn is based off of the code for [Google OAuth](https://github.com/aspnet/Security/tree/dev/src) with minor modifications
+
