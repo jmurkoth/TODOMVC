@@ -4,7 +4,7 @@ AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/1tqwbqoxy
 
 This project will be  used to explore the following new features in ASPNET 5; starting with an empty project
 
-1. - [ ] Config files
+1. - [] Config files
 2. - [x] Logging
 3. - [x] Tag Helper
 4. - [x] Identity
